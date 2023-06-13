@@ -1,0 +1,81 @@
+package app;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import App.Conexao;
+import App.User;
+
+public class UsuarioDAO extends Conexao {
+	
+		public User salva(User usuario){
+			if(buscaPeloLogin(usuario.getNome()) == null) {
+				return insere(usuario);
+			} else {
+				return atualiza(usuario);
+			}
+		}
+		
+		public User atualiza(User usuario) {
+			
+			try {
+				//comando SQL
+				String comandoSQL = " update usuarios set senha = ? "
+						          + " where login = ?";
+				PreparedStatement stmt = con.prepareStatement(comandoSQL);
+				stmt.setString(1, usuario.getSenha());
+				stmt.setString(2, usuario.getNome());
+				stmt.execute();
+				//deu tudo certo
+				return usuario;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+
+		} 
+		
+		
+		public User insere(User usuario) {
+			
+			try {
+				//comando SQL
+				String comandoSQL = "insert into usuarios (login, senha ) "
+						          + " values (? , ?)";
+				PreparedStatement stmt = con.prepareStatement(comandoSQL);
+				stmt.setString(1, usuario.getNome());
+				stmt.setString(2, usuario.getSenha());
+				stmt.execute();
+				//deu tudo certo
+				return usuario;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+
+		} 
+		
+		public User buscaPeloLogin(String login) {
+			try {
+				String comandoSQL = "select login, senha from usuarios where login = ? ";
+				PreparedStatement stmt = con.prepareStatement(comandoSQL);
+				stmt.setString(1, login);
+				ResultSet rs = stmt.executeQuery();
+				if (rs.next()) {
+					User usuario = new User();
+					usuario.setNome(rs.getString("login"));
+					usuario.setSenha(rs.getString("senha"));
+					return usuario;
+				}
+			
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+}
