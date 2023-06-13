@@ -1,0 +1,53 @@
+package App;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Objetos {
+    static String[] objetos = {"ADICIONAR ELETRODOMESTICO", "FORNO ELETRICO", "AIR FRYER", "TELEVISÃO", "VENTILADOR", "AR-CONDICIONADO", "CHUVEIRO ELETRICO", "FREEZER", "COMPUTADOR", "LAMPADA",
+            "CARREGADOR", "CAFETEIRA", "CHURRASQUEIRA ELETRICA", "BOMBA DE ÁGUA", "ASPIRADOR DE PÓ", "SECADOR DE CABELO", "FERRO ELETRICO", "MAQUINA DE LAVAR ROUPA", "IMPRESSORA", "GELADEIRA"};
+
+    static Map<String, Integer> consumoObjetos = new HashMap<String, Integer>() {{
+        put("GELADEIRA", 250);
+        put("FORNO ELETRICO", 4500);
+        put("AIR FRYER", 1500);
+        put("TELEVISÃO", 280);
+        put("VENTILADOR", 100);
+        put("AR-CONDICIONADO", 1400);
+        put("CHUVEIRO ELETRICO", 5500);
+        put("FREEZER", 500);
+        put("COMPUTADOR", 300);
+        put("LAMPADA", 12);
+        put("CARREGADOR", 3);
+        put("CAFETEIRA", 600);
+        put("CHURRASQUEIRA ELETRICA", 3000);
+        put("BOMBA DE ÁGUA", 400);
+        put("ASPIRADOR DE PÓ", 600);
+        put("SECADOR DE CABELO", 1000);
+        put("FERRO ELETRICO", 1000);
+        put("MAQUINA DE LAVAR ROUPA", 1000);
+        put("IMPRESSORA", 45);
+    }};
+
+    public static void adicionarEletrodomesticoPersonalizado(String nomeEletrodomestico, int consumoEletrodomestico) {
+        getConsumoObjetos().put(nomeEletrodomestico.toUpperCase(), consumoEletrodomestico);
+        setObjetos(getConsumoObjetos().keySet().toArray(new String[0]));
+    }
+
+	public static String[] getObjetos() {
+		return objetos;
+	}
+
+	public static void setObjetos(String[] objetos) {
+		Objetos.objetos = objetos;
+	}
+
+	public static Map<String, Integer> getConsumoObjetos() {
+		return consumoObjetos;
+	}
+
+	public static void setConsumoObjetos(Map<String, Integer> consumoObjetos) {
+		Objetos.consumoObjetos = consumoObjetos;
+	}
+}
+	
