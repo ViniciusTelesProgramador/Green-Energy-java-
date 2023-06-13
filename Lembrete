@@ -1,0 +1,55 @@
+package App;
+
+public class Lembrete {
+    private String tipo;
+    private String horario;
+    private int diaSemana;
+    private String mensagem;
+
+    public Lembrete(String tipo, String horario, String mensagem) {
+        this.tipo = tipo;
+        this.horario = horario;
+        this.mensagem = mensagem;
+    }
+
+    public Lembrete(String tipo, String horario, int diaSemana, String mensagem) {
+        this.tipo = tipo;
+        this.horario = horario;
+        this.diaSemana = diaSemana;
+        this.mensagem = mensagem;
+    }
+
+    // Métodos getters e setters
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public int getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(int diaSemana) {
+        this.diaSemana = diaSemana;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+}
