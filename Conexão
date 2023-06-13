@@ -1,0 +1,20 @@
+package app;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Conexao {
+	static Connection con;
+	
+	public Conexao(){
+		try {
+		if(con == null) {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/novo_banco","root","");
+		}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
+}
