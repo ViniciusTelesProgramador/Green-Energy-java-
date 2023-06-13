@@ -1,0 +1,101 @@
+package App;
+
+import java.util.Map;
+import java.util.Scanner;
+
+public class Case5_Sul extends Green {
+	   private double bandeira;
+	    private Objetos objetos;
+	    private Map<String, Integer> eletrodomesticosSelecionados;
+	    private Scanner scan;
+
+	    public Case5_Sul(double bandeira, Objetos objetos, Map<String, Integer> eletrodomesticosSelecionados, Scanner scan) {
+	        this.bandeira = bandeira;
+	        this.objetos = objetos;
+	        this.eletrodomesticosSelecionados = eletrodomesticosSelecionados;
+	        this.scan = scan;
+	    }
+
+
+@Override
+public void executar() {
+	
+    	bandeira = 0.656;
+        int eletro = 0;
+        boolean eletroValido = false;
+        while (!eletroValido) {
+            System.out.println("Selecione o eletrodoméstico:");
+            for (int i = 0; i < objetos.objetos.length; i++) {
+                System.out.println((i + 1) + " - " + objetos.objetos[i]);
+            }
+            eletro = scan.nextInt();
+            if (eletro >= 1 && eletro <= objetos.objetos.length) {
+                eletroValido = true;
+            } else if (eletro == 0) {       
+                System.out.println("Adicionar eletrodoméstico personalizado");
+                System.out.print("Digite o nome do eletrodoméstico: ");
+                String nomeEletrodomestico = scan.next();
+                System.out.print("Digite o consumo do eletrodoméstico (em watts): ");
+                int consumoEletrodomestico = scan.nextInt();
+
+                // Adiciona o eletrodoméstico personalizado à lista
+                objetos.adicionarEletrodomesticoPersonalizado(nomeEletrodomestico, consumoEletrodomestico);
+
+                System.out.println("Eletrodoméstico " + nomeEletrodomestico + " adicionado com sucesso!");
+
+            } else {
+                System.out.println("Opção inválida. Selecione um eletrodoméstico válido.");
+            }
+        } // ADICIONA ELETRODOMESTICOS A LISTA 
+
+        System.out.println("Eletrodoméstico " + objetos.objetos[eletro - 1].toLowerCase() + " adicionado com sucesso!");
+
+       
+         int horasPorDia = 0;
+         while (true) {
+             System.out.print("Quantas horas por dia " + objetos.objetos[eletro - 1].toLowerCase() + " fica ligado? ");
+             horasPorDia = scan.nextInt();
+             if (horasPorDia < 0 || horasPorDia > 24) {
+                 System.out.println("Por favor, informe um valor entre 0 e 24 horas.");
+             } else {
+                 break;
+                 // ADICIONA A QUANTIDADE DE HORAS QUE UM ELETRODOMESTICO FICAL LIGADO
+             }
+         }
+
+         int dias = 0;
+         while (true) {
+             System.out.print("Por quantos dias " + objetos.objetos[eletro - 1].toLowerCase() + " ficou ligado? ");
+             dias = scan.nextInt();
+             if (dias < 0) {
+                 System.out.println("Por favor, informe um valor positivo para os dias.");
+             } else {
+                 break;
+                 
+             }
+         }// ADICIONA A QUANTID\ADE DE DIAS QUE UM ELETRODOMESTICO FICA LIGADO 
+
+         double consumo = objetos.consumoObjetos.get(objetos.objetos[eletro - 1]) * horasPorDia * dias/1000;                      
+        // CALCULO PARA A MEDIA MENSAL 
+        
+         double kwhTotal = consumo;
+        
+         double formulaValor = bandeira * consumo;
+
+         double ValorRS = bandeira * kwhTotal;
+         // CALCULO DO VALOR EM REAIS
+         
+         double ValorTotal = ValorRS;
+         
+         // ADICIONA ELETRODOMESTICO E SEU CONSUMO A LISTA
+         eletrodomesticosSelecionados.put(objetos.objetos[eletro - 1], (int) consumo);
+         
+         //INFORMA QUANTO CUSTOU DETERMINADO ELETRODOMESTICO 
+         System.out.println("CUSTOU: "+ ValorRS + "$");
+         
+         // INFORMA QUANTO CONSUMMIU DETERMINADO ELETRODOMESTICO 
+         System.out.println("O objeto " + objetos.objetos[eletro - 1].toLowerCase() + " consumiu " + consumo + " kwh, na tarifa " + bandeira + ".");
+         
+         
+	}// IF REGIAO 1 
+}
